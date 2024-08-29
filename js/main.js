@@ -1,54 +1,54 @@
-let audio = document.querySelector('.quranPlayer'),
-    surahContainer = document.querySelector('.surahs'),
-    ayah = document.querySelector('.ayah'),
-    next = document.querySelector('.next'),
-    prev = document.querySelector('.previous'),
-    play = document.querySelector('.play'),
-    title = document.getElementById('title');
+document.addEventListener("DOMContentLoaded", () => {
+    fetchSurahs();
 
-getSurahs();
+    document.getElementById("surahs").addEventListener("click", function(e) {
+        if (e.target.tagName === 'LI') {
+            fetchAyahs(e.target.dataset.surah);
+            fetchAudio(e.target.dataset.surah);
+        }
+    });
+});
 
-function getSurahs() {
-    fetch('https://quran-endpoint.vercel.app/quran')
-        .then(res => res.json())
+function fetchSurahs() {
+    fetch("https://api.quran.com/api/v4/chapters")
+        .then(response => response.json())
         .then(data => {
-            console.log(data.data);
-            for (let surah in data.data) {
-                surahContainer.innerHTML += `
-                    <div>
-                        <p class="ar">${data.data[surah].asma.ar.long}</p>
-                        <p>${data.data[surah].asma.en.long} (${data.data[surah].asma.translation.en})</p>
-                    </div>
-                `
-            }
-
-            // select all surahs
-            let allSurahs = document.querySelectorAll('.surahs div');
-            let index;
-
-            allSurahs.forEach((surah, idx) => {
-                surah.addEventListener('click', () => {
-                    index = idx;
-                    play(idx);
-                })
-            })
-
-            prev.addEventListener('click', () => {
-                (index > 0) ? index-- : index;
-                play(index);
-            })
-
-            next.addEventListener('click', () => {
-                (index < 114) ? index++ : index;
-                play(index);
-            })
-
-            function play(idx) {
-                console.log(idx);
-                // تغيير التلاوة إلى صوت عبد الباسط عبد الصمد
-                audio.src = `https://server8.mp3quran.net/basit_mjwd/${idx + 1}.mp3`;
-                title.innerText = `${idx + 1}. ${data.data[idx].asma.en.long}`;
-                audio.play(); // تشغيل الصوت تلقائيًا
-            }
+            const surahs = document.getElementById("surahs");
+            data.chapters.forEach(surah => {
+                const li = document.createElement("li");
+                li.textContent = surah.name_arabic;
+                li.dataset.surah = surah.id;
+                surahs.appendChild(li);
+            });
         })
+        .catch(error => console.error("Error fetching Surahs:", error));
+}
+
+function fetchAyahs(surahId) {
+    fetch(`https://api.quran.com/api/v4/quran/verses/uthmani?chapter_number=${surahId}`)
+        .then(response => response.json())
+        .then(data => {
+            const ayahs = document.getElementById("ayahs");
+            ayahs.innerHTML = '';
+            data.verses.forEach(ayah => {
+                const p = document.createElement("p");
+                p.textContent = ayah.text_uthmani;
+                ayahs.appendChild(p);
+            });
+        })
+        .catch(error => console.error("Error fetching Ayahs:", error));
+}
+
+function fetchAudio(surahId) {
+    fetch(`https://api.quran.com/api/v4/chapter_recitations/7/${surahId}`)
+        .then(response => response.json())
+        .then(data => {
+            const audio = document.getElementById("audio");
+            audio.src = data.audio_file.audio_url;
+        })
+        .catch(error => console.error("Error fetching audio:", error));
+}
+
+function toggleTheme() {
+    document.body.classList.toggle("light-theme");
 }
