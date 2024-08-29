@@ -3,20 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مشغل القرآن الكريم</title>
+    <title>موقع القرآن الكريم</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>بسم الله الرحمن الرحيم</h1>
-        <audio id="audio-player" controls>
-            <source id="audio-source" src="" type="audio/mp3">
-            متصفحك لا يدعم تشغيل الصوت.
-        </audio>
+        <h1>مشغل القرآن الكريم</h1>
     </header>
     <main>
-        <section id="sura-list">
+        <section id="player">
+            <audio id="audio-player" controls>
+                <source id="audio-source" src="" type="audio/mp3">
+                متصفحك لا يدعم تشغيل الصوت.
+            </audio>
+        </section>
+        <section id="surah-list">
             <ul id="surahs"></ul>
+        </section>
+        <section id="ayah-display">
+            <h2>عرض الآيات</h2>
+            <div id="ayahs"></div>
         </section>
     </main>
     <script src="script.js"></script>
