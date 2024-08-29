@@ -45,8 +45,10 @@ function getSurahs() {
 
             function play(idx) {
                 console.log(idx);
-                audio.src = data.data[idx].recitation.full;
-                title.innerText = `${idx+1}. ${data.data[idx].asma.en.long}`;
+                // تغيير التلاوة إلى صوت عبد الباسط عبد الصمد
+                audio.src = `https://server8.mp3quran.net/basit_mjwd/${idx + 1}.mp3`;
+                title.innerText = `${idx + 1}. ${data.data[idx].asma.en.long}`;
+                audio.play(); // تشغيل الصوت تلقائيًا
             }
         })
 }
