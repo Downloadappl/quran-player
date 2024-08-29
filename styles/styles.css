@@ -1,8 +1,8 @@
 body {
     font-family: 'Amiri', serif;
     direction: rtl;
-    background-color: #f0f0f0;
-    color: #333;
+    background-color: #1e1e1e;
+    color: #f0f0f0;
     margin: 0;
     padding: 0;
 }
@@ -12,14 +12,18 @@ header {
     background-color: #333;
     color: #fff;
     padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 audio {
-    margin-top: 10px;
+    margin: 20px auto;
+    display: block;
 }
 
 main {
     padding: 20px;
+    max-width: 800px;
+    margin: auto;
 }
 
 ul {
@@ -28,10 +32,9 @@ ul {
 }
 
 li {
-    background-color: #fff;
+    background-color: #2e2e2e;
     margin-bottom: 10px;
     padding: 15px;
-    border: 1px solid #ddd;
     border-radius: 8px;
     text-align: center;
     cursor: pointer;
@@ -39,5 +42,12 @@ li {
 }
 
 li:hover {
-    background-color: #e0e0e0;
+    background-color: #444;
+}
+
+#ayah-display {
+    background-color: #2e2e2e;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
 }
