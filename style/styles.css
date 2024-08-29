@@ -1,0 +1,78 @@
+body {
+    font-family: 'Amiri', serif;
+    direction: rtl;
+    background-color: #222;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    padding: 15px;
+    text-align: center;
+}
+
+nav button {
+    background-color: #555;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+main {
+    padding: 20px;
+}
+
+h1, h2 {
+    margin: 10px 0;
+}
+
+#surah-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+#surah-list li {
+    cursor: pointer;
+    padding: 5px;
+    border-bottom: 1px solid #444;
+}
+
+.light-theme {
+    background-color: #fff;
+    color: #000;
+}
+
+.light-theme header {
+    background-color: #f0f0f0;
+}
+
+.light-theme nav button {
+    background-color: #ddd;
+    color: #000;
+}    border-radius: 50%;
+    font-size: 25px;
+    line-height: 80px;
+    text-align: center;
+    background-color: inherit;
+    transition: inherit;
+    box-shadow: inherit;
+}
+
+.surahs > div::before {
+    content: "";
+    position: absolute;
+    border: 7px solid transparent;
+    border-right-color: #23162f;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -14px;
+}
+
+.surahs > div:hover,
+.surahs > div:hover::after {
+    background: linear-gradient(to bottom, #434343, black);
+    color: white;
+}
